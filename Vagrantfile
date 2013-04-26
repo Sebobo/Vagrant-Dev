@@ -51,10 +51,9 @@ Vagrant.configure("2") do |config|
   end
 
 
-  config.vm.synced_folder "/Users/sebastianhelzle/Workspace", "/srv/projects"
-  #config.vm.synced_folder "www", "/var/www", "/dev/location"
+  config.vm.synced_folder "/Users/sebastianhelzle/Workspace", "/var/www"
 
-  config.vm.hostname = "jenkins.local"
+  #config.vm.hostname = "jenkins.local"
   config.vm.network :private_network, ip: "192.168.164.123"
   config.vm.network :forwarded_port, host: 8080, guest: 8080
   config.vm.network :forwarded_port, host: 4567, guest: 80
