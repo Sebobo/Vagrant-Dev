@@ -67,3 +67,12 @@
 [submodule "cookbooks/ohai"]
 	path = cookbooks/ohai
 	url = https://github.com/opscode-cookbooks/ohai
+[submodule "cookbooks/php"]
+	path = cookbooks/php
+	url = https://github.com/opscode-cookbooks/php
+[submodule "cookbooks/memcached"]
+	path = cookbooks/memcached
+	url = https://github.com/opscode-cookbooks/memcached
+[submodule "cookbooks/xml"]
+	path = cookbooks/xml
+	url = https://github.com/opscode-cookbooks/xml
