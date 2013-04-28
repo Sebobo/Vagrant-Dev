@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider "virtualbox" do |v|
     v.name = "Jenkins_VM"
-    v.customize ["modifyvm", :id, "--memory", 1024]
+    v.customize ["modifyvm", :id, "--memory", 2048]
   end
 
   config.vm.provision :shell, :path => "bootstrap.sh"
@@ -26,6 +26,8 @@ Vagrant.configure("2") do |config|
       },
       "projects" => {
         "local" => true,
+        "apache_root_dir" => "/var/www",
+        "apache_vhosts_config_dir" => "sites-available",
         "project_list" => [
             "shit2013",
             "jquery-smallipop",
@@ -46,10 +48,6 @@ Vagrant.configure("2") do |config|
       "apache" => {
         "default_site_enabled" => true,
       },
-      "pph_apache" => {
-        "apache_root_dir" => "/var/www",
-        "apache_vhosts_config_dir" => "sites-available",
-      }
     }
 
     # Enable apt-get package
@@ -91,12 +89,12 @@ Vagrant.configure("2") do |config|
   # Do some post provisioning
   config.vm.provision :shell, :path => "post_provision.sh"
 
-  config.vm.synced_folder "/Users/sebastianhelzle/Workspace", "/var/workspace", :nfs => true
+  config.vm.synced_folder "~/Workspace", "/var/workspace", :nfs => true
 
   config.vm.hostname = "dev.box"
   config.vm.network :private_network, ip: "192.168.164.123"
-  config.vm.network :forwarded_port, host: 8080, guest: 8080
-  config.vm.network :forwarded_port, host: 4567, guest: 80
-  config.vm.network :forwarded_port, host: 5984, guest: 5984, auto_correct: true
+  # config.vm.network :forwarded_port, host: 8080, guest: 8080
+  # config.vm.network :forwarded_port, host: 4567, guest: 80
+  # config.vm.network :forwarded_port, host: 5984, guest: 5984, auto_correct: true
 
 end

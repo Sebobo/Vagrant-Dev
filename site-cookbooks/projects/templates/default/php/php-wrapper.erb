@@ -1,0 +1,14 @@
+#!/bin/sh
+# $Id: php-wrapper,v 1.2 2009/12/04 11:58:39 ry96 Exp $
+# wrapper script for using php-cgi in suexec environment with (fast-)cgi
+
+# replace with path to virtual host etc dir to use own php.ini
+PHPRC="/usr/local/etc"
+export PHPRC
+
+# leave process management to mod_fcgid
+PHP_FCGI_MAX_REQUESTS=0
+PHP_FCGI_CHILDREN=0
+export PHP_FCGI_MAX_REQUESTS PHP_FCGI_CHILDREN
+
+exec /usr/local/bin/php-cgi

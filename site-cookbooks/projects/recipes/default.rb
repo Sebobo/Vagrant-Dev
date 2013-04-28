@@ -6,8 +6,6 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-::Chef::Recipe.send(:include, PPH::Apache::VHost)
-
 vhosts = []
 
 node['projects']['project_list'].each do |project|
@@ -31,16 +29,29 @@ node['projects']['project_list'].each do |project|
   vhosts.push(vhost)
 end
 
-node.default["pph_apache"]["vhosts"] = vhosts
+node.default["projects"]["vhosts"] = vhosts
 
-include_recipe "pph_apache::default"
+include_recipe "apache2"
+
+# Create vhosts
+include_recipe "projects::sites"
 
 # Create html file with list of projects
-template "#{node.pph_apache.apache_root_dir}/index.html" do
+template "#{node.projects.apache_root_dir}/index.html" do
   source "pages/sites.html.erb"
   variables(
       :params => {
           :vhosts => vhosts,
       }
   )
+end
+
+cookbook_file "#{node.projects.apache_root_dir}/markdown.css" do
+  source "markdown.css"
+  mode 00755
+end
+
+# Restart apache2 after creating all vhosts
+service "apache2" do
+  action :restart
 end
