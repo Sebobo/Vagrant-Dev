@@ -1,0 +1,9 @@
+{
+    "id": "jquery-smallipop",
+    "project_name": "jquery-smallipop",
+    "server_name": "dev.box",
+    "apache": {
+        "ssl": false,
+        "domains": []
+    }
+}

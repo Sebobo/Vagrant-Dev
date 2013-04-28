@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <title>Active projects</title>
+  </head>
+  <body>
+    <h1>Sites</h1>
+
+    <ul>
+      <% @params[:vhosts].each do |vhost| %>
+        <li>
+          <a href="http://<%= vhost[:contract_id] %>.<%= vhost[:server_name] %>">
+            <%= vhost[:contract_id] %>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </body>
+</html>

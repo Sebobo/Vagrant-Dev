@@ -1,0 +1,9 @@
+{
+    "id": "jquery-rondell",
+    "project_name": "jquery-rondell",
+    "server_name": "dev.box",
+    "apache": {
+        "ssl": false,
+        "domains": []
+    }
+}
