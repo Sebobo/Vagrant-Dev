@@ -28,12 +28,7 @@ Vagrant.configure("2") do |config|
         "local" => true,
         "apache_root_dir" => "/var/www",
         "apache_vhosts_config_dir" => "sites-available",
-        "project_list" => [
-            "shit2013",
-            "jquery-smallipop",
-            "jquery-rondell",
-            "tools"
-        ]
+        "project_list" => []
       },
       "couchdb" => {
         "bind_address" => "0.0.0.0",
@@ -50,18 +45,22 @@ Vagrant.configure("2") do |config|
       },
     }
 
+    # Merge project list from json file
+    chef.json.merge!(JSON.parse(File.read("project-list.json")))
+
     # Enable apt-get package
-    chef.add_recipe("apt")
+    chef.add_recipe "apt"
 
     # Setup databases
-    chef.add_recipe("mysql")
-    chef.add_recipe("mysql::server")
-    chef.add_recipe("couchdb")
+    chef.add_recipe "mysql"
+    chef.add_recipe "mysql::server"
+    chef.add_recipe "database::mysql"
+    chef.add_recipe "couchdb"
 
     # Setup apache
-    chef.add_recipe("apache2")
-    chef.add_recipe("apache2::mod_php5")
-    chef.add_recipe("apache2::mod_rewrite")
+    chef.add_recipe "apache2"
+    chef.add_recipe "apache2::mod_php5"
+    chef.add_recipe "apache2::mod_rewrite"
 
     # Setup php
     chef.add_recipe "php"
@@ -71,19 +70,19 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "php::module_sqlite3"
 
     # Tools
-    chef.add_recipe("imagemagick")
-    chef.add_recipe("phantomjs")
-    chef.add_recipe("memcached")
-    chef.add_recipe("openssl")
+    chef.add_recipe "imagemagick"
+    chef.add_recipe "phantomjs"
+    chef.add_recipe "memcached"
+    chef.add_recipe "openssl"
 
     # Nodejs
-    chef.add_recipe("nodejs-cookbook::install_from_package")
+    chef.add_recipe "nodejs-cookbook::install_from_package"
 
     # Add projects
     chef.add_recipe "projects"
 
     # Jenkins
-    chef.add_recipe("jenkins::server")
+    chef.add_recipe "jenkins::server"
   end
 
   # Do some post provisioning
@@ -93,8 +92,5 @@ Vagrant.configure("2") do |config|
 
   config.vm.hostname = "dev.box"
   config.vm.network :private_network, ip: "192.168.164.123"
-  # config.vm.network :forwarded_port, host: 8080, guest: 8080
-  # config.vm.network :forwarded_port, host: 4567, guest: 80
-  # config.vm.network :forwarded_port, host: 5984, guest: 5984, auto_correct: true
 
 end

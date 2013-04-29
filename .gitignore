@@ -2,3 +2,4 @@
 /vagrant.sublime-workspace
 /.vagrant/
 /.idea/
+data_bags/projects/*.json
