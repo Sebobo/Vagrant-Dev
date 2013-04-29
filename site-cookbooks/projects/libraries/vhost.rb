@@ -12,6 +12,7 @@ module Projects
         current_server = vhost[:server_name]
         domains = vhost[:domains]
         state = vhost[:state]
+        create_database = vhost[:create_database]
 
         if vhost[:document_root]
           document_root = vhost[:document_root]
@@ -97,6 +98,18 @@ module Projects
               action :modify
               members "vagrant"
               append true
+            end
+
+            # Create database if enabled
+            if create_database
+              mysql_database "#{contract_id}" do
+                connection ({
+                  :host => "localhost",
+                  :username => 'root',
+                  :password => node['mysql']['server_root_password']
+                })
+                action :create
+              end
             end
 
           when "disabled"

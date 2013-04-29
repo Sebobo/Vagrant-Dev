@@ -76,3 +76,15 @@
 [submodule "cookbooks/xml"]
 	path = cookbooks/xml
 	url = https://github.com/opscode-cookbooks/xml
+[submodule "cookbooks/database"]
+	path = cookbooks/database
+	url = https://github.com/opscode-cookbooks/database
+[submodule "cookbooks/aws"]
+	path = cookbooks/aws
+	url = https://github.com/opscode-cookbooks/aws
+[submodule "cookbooks/xfs"]
+	path = cookbooks/xfs
+	url = https://github.com/opscode-cookbooks/xfs
+[submodule "cookbooks/postgresql"]
+	path = cookbooks/postgresql
+	url = https://github.com/opscode-cookbooks/postgresql

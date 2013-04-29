@@ -24,6 +24,7 @@ node['projects']['project_list'].each do |project|
       :state => "active",
       :suffix => "",
       :document_root => project_config["apache"]["document_root"],
+      :create_database => project_config["mysql"]["create_database"],
   }
 
   vhosts.push(vhost)
