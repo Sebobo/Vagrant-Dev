@@ -3,3 +3,4 @@
 /.vagrant/
 /.idea/
 data_bags/projects/*.json
+/project-list.json

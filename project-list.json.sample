@@ -1,0 +1,10 @@
+{
+  "projects": {
+    "local": true,
+    "apache_root_dir": "/var/www",
+    "apache_vhosts_config_dir": "sites-available",
+    "project_list": [
+      "tools"
+    ]
+  }
+}
