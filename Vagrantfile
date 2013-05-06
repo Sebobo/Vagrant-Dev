@@ -4,9 +4,13 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "precise64"
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  config.vm.hostname = "dev.box"
+  config.vm.network :private_network, ip: "192.168.164.123"
+
+  config.vm.synced_folder "~/Workspace", "/var/workspace", :nfs => true
 
   config.vm.provider "virtualbox" do |v|
-    v.name = "Jenkins_VM"
+    v.name = "Dev.Box"
     v.customize ["modifyvm", :id, "--memory", 2048]
   end
 
@@ -16,6 +20,7 @@ Vagrant.configure("2") do |config|
     # This path will be expanded relative to the project directory
     chef.cookbooks_path = ["cookbooks", "site-cookbooks"]
     chef.data_bags_path = "data_bags"
+    # chef.nfs = true
 
     chef.json = {
       "mysql" => {
@@ -87,10 +92,5 @@ Vagrant.configure("2") do |config|
 
   # Do some post provisioning
   config.vm.provision :shell, :path => "post_provision.sh"
-
-  config.vm.synced_folder "~/Workspace", "/var/workspace", :nfs => true
-
-  config.vm.hostname = "dev.box"
-  config.vm.network :private_network, ip: "192.168.164.123"
 
 end
