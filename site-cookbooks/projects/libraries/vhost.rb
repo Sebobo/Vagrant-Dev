@@ -73,21 +73,13 @@ module Projects
               recursive true
             end
 
-            %w{ / cgi-bin etc fcgi-bin htdocs log sbin sql }.each do |dir|
+            %w{ / etc htdocs log }.each do |dir|
               directory "#{user_dir}/#{dir}" do
                 owner contract_id
                 group contract_id
                 action :create
               end
             end
-
-            template "#{user_dir}/fcgi-bin/php-wrapper" do
-              source "php/php-wrapper.erb"
-              mode 0750
-              owner contract_id
-              group contract_id
-            end
-
 
             apache_site "#{contract_id}.conf" do
               enable true
@@ -114,9 +106,7 @@ module Projects
 
           when "disabled"
 
-            template "#{node.apache.dir}/protect.d/#{contract_id}/disable-site.conf" do
-              source "apache/protect.d/disable-site.conf"
-            end
+            # TODO: implement
 
 
           when "deleted"
