@@ -40,9 +40,6 @@
 [submodule "cookbooks/chef-apt"]
 	path = cookbooks/chef-apt
 	url = https://github.com/fnichol/chef-apt
-[submodule "cookbooks/chef-client"]
-	path = cookbooks/chef-client
-	url = https://github.com/opscode-cookbooks/chef-client
 [submodule "cookbooks/openssl"]
 	path = cookbooks/openssl
 	url = https://github.com/opscode-cookbooks/openssl
@@ -58,9 +55,6 @@
 [submodule "cookbooks/yum"]
 	path = cookbooks/yum
 	url = https://github.com/opscode-cookbooks/yum
-[submodule "nginx"]
-	path = nginx
-	url = https://github.com/opscode-cookbooks/nginx
 [submodule "cookbooks/nginx"]
 	path = cookbooks/nginx
 	url = https://github.com/opscode-cookbooks/nginx
@@ -88,3 +82,6 @@
 [submodule "cookbooks/postgresql"]
 	path = cookbooks/postgresql
 	url = https://github.com/opscode-cookbooks/postgresql
+[submodule "cookbooks/varnish"]
+	path = cookbooks/varnish
+	url = https://github.com/opscode-cookbooks/varnish
