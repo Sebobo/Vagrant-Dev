@@ -47,6 +47,7 @@ Vagrant.configure("2") do |config|
       },
       "apache" => {
         "default_site_enabled" => true,
+        "listen_ports" => ["8000"],
       },
     }
 
@@ -66,6 +67,10 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "apache2"
     chef.add_recipe "apache2::mod_php5"
     chef.add_recipe "apache2::mod_rewrite"
+    chef.add_recipe "apache2::mod_expires"
+
+    # Setup varnish
+    chef.add_recipe "varnish"
 
     # Setup php
     chef.add_recipe "php"
@@ -73,6 +78,7 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "php::module_mysql"
     chef.add_recipe "php::module_memcache"
     chef.add_recipe "php::module_sqlite3"
+    chef.add_recipe "php::module_apc"
 
     # Tools
     chef.add_recipe "imagemagick"
@@ -87,7 +93,7 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "projects"
 
     # Jenkins
-    chef.add_recipe "jenkins::server"
+    # chef.add_recipe "jenkins::server"
   end
 
   # Do some post provisioning

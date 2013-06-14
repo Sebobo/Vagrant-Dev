@@ -1,4 +1,4 @@
-<VirtualHost *:80>
+<VirtualHost *:8000>
     ServerName         <%= @params[:server_name] %>
 <% if @params[:server_aliases].size > 0 %>
     ServerAlias        <% @params[:server_aliases].each do |a| %><%= a %> <% end %>
