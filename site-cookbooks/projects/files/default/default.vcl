@@ -34,6 +34,7 @@ sub vcl_recv {
     if (req.http.Authorization || req.http.Cookie) {
         return (pass);
     }
+
     if(req.http.host ~ "/typo3"){
         ## TYPO3-Backend nicht cachen
         if (req.http.cookie ~ "be_typo_user"){
@@ -49,6 +50,9 @@ sub vcl_recv {
             unset req.http.Cookie;
         }
     }
+    if (req.http.Cache-Control ~ "no-cache") {
+        return (pass);
+    }
 
     return (lookup);
 }
@@ -58,7 +62,7 @@ sub vcl_fetch {
     set req.grace = 24h;
     if (req.url ~ "\.(jpeg|jpg|png|gif|ico|swf|js|css|txt|gz|zip|rar|bz2|tgz|tbz|html|htm|pdf|pls|torrent)$") {
         set beresp.ttl = 1m;
-        ## Umstellen wenn auf Produktiv
+        unset beresp.http.set-cookie;
     }
     if(req.http.host ~ "/typo3"){
         if (beresp.http.set-cookie ~ "be_typo_user"){
@@ -74,6 +78,14 @@ sub vcl_fetch {
 }
 
 sub vcl_deliver {
+    if (resp.http.magicmarker) {
+        /* Remove the magic marker */
+        unset resp.http.magicmarker;
+
+        /* By definition we have a fresh object */
+        set resp.http.age = "0";
+    }
+
     if (obj.hits > 0) {
         set resp.http.X-Varnish-Cache = "HIT";
         set resp.http.X-Cache-Hits = obj.hits;
