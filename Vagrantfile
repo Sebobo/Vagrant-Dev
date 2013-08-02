@@ -7,11 +7,15 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "dev.box"
   config.vm.network :private_network, ip: "192.168.164.123"
 
-  config.vm.synced_folder "~/Workspace", "/var/workspace", :nfs => true
+  config.vm.synced_folder "~/Workspace", "/var/workspace", :nfs => true, :nfs_version => 3
 
   config.vm.provider "virtualbox" do |v|
     v.name = "Dev.Box"
-    v.customize ["modifyvm", :id, "--memory", 2048]
+    v.customize [
+      "modifyvm", :id,
+      "--memory", 2048,
+      "--cpus", 2
+    ]
   end
 
   config.vm.provision :shell, :path => "bootstrap.sh"
@@ -34,9 +38,6 @@ Vagrant.configure("2") do |config|
         "apache_root_dir" => "/var/www",
         "apache_vhosts_config_dir" => "sites-available",
         "project_list" => []
-      },
-      "couchdb" => {
-        "bind_address" => "0.0.0.0",
       },
       "couch_db" => {
         "config" => {
@@ -95,8 +96,5 @@ Vagrant.configure("2") do |config|
     # Jenkins
     # chef.add_recipe "jenkins::server"
   end
-
-  # Do some post provisioning
-  config.vm.provision :shell, :path => "post_provision.sh"
 
 end
