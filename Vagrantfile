@@ -49,6 +49,7 @@ Vagrant.configure("2") do |config|
 
     # Setup php
     chef.add_recipe "php"
+    chef.add_recipe "php::module_gd"
     chef.add_recipe "php::module_curl"
     chef.add_recipe "php::module_mysql"
     chef.add_recipe "php::module_memcache"
