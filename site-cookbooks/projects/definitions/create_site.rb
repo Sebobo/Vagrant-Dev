@@ -14,7 +14,7 @@ define :create_site, , :action => :enable
     when :enable
 
       #############################
-      # /var/apache things
+      # Create site directories
       #############################
 
       %w{ / etc htdocs log }.each do |dir|
