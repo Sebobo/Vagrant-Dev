@@ -2,5 +2,5 @@
 /vagrant.sublime-workspace
 /.vagrant/
 /.idea/
-data_bags/projects/*.json
-/project-list.json
+/data_bags/projects/*.json
+/dev-config.json

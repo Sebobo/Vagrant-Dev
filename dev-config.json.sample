@@ -16,7 +16,7 @@
     }
   },
   "apache": {
-    "default_site_enabled": true,
+    "default_site_enabled": false,
     "listen_ports": ["8000"]
   },
 }

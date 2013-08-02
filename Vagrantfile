@@ -27,7 +27,7 @@ Vagrant.configure("2") do |config|
 
     # Merge project list from json file
     chef.json = {}
-    chef.json.merge!(JSON.parse(File.read("project-list.json")))
+    chef.json.merge!(JSON.parse(File.read("dev-config.json")))
 
     # Enable apt-get package
     chef.add_recipe "apt"
