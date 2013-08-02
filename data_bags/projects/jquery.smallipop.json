@@ -2,5 +2,5 @@
   "id": "jquery-smallipop",
   "document_root": "/var/workspace/jquery.smallipop",
   "create_database": false,
-  "state": "enabled"
+  "state": "enable"
 }

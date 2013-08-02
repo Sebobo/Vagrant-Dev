@@ -2,5 +2,5 @@
   "id": "shit2013",
   "document_root": "/var/workspace/shit2013",
   "create_database": false,
-  "state": "enabled"
+  "state": "enable"
 }

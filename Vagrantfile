@@ -24,35 +24,9 @@ Vagrant.configure("2") do |config|
     # This path will be expanded relative to the project directory
     chef.cookbooks_path = ["cookbooks", "site-cookbooks"]
     chef.data_bags_path = "data_bags"
-    # chef.nfs = true
-
-    chef.json = {
-      "mysql" => {
-        "server_root_password" => "worschdsalat",
-        "bind_address" => "127.0.0.1",
-        "server_debian_password" => "worschdsalat",
-        "server_repl_password" => "worschdsalat",
-      },
-      "projects" => {
-        "local" => true,
-        "apache_root_dir" => "/var/www",
-        "apache_vhosts_config_dir" => "sites-available",
-        "project_list" => []
-      },
-      "couch_db" => {
-        "config" => {
-          "httpd" => {
-            "bind_address" => "0.0.0.0",
-          }
-        }
-      },
-      "apache" => {
-        "default_site_enabled" => true,
-        "listen_ports" => ["8000"],
-      },
-    }
 
     # Merge project list from json file
+    chef.json = {}
     chef.json.merge!(JSON.parse(File.read("project-list.json")))
 
     # Enable apt-get package
@@ -94,7 +68,7 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "projects"
 
     # Jenkins
-    # chef.add_recipe "jenkins::server"
+    chef.add_recipe "jenkins::server"
   end
 
 end

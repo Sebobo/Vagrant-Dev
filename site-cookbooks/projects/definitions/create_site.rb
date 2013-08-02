@@ -1,6 +1,6 @@
-define :create_site, , :action => :enable
-  apache_root_dir = node['projects']['apache_root_dir']
-  apache_vhosts_config_dir = node['apache']['dir'] + '/' + node['projects']['apache_vhosts_config_dir']
+define :create_site, :create_database => false, :action => :enable do
+  apache_root_dir = '/var/www'
+  apache_vhosts_config_dir = node['apache']['dir'] + '/sites-available'
 
   vhost_id = params[:name]
   vhost_basedir = apache_root_dir + '/' + vhost_id
@@ -34,17 +34,10 @@ define :create_site, , :action => :enable
         source "apache/vhost.conf.erb"
         notifies :reload, "service[apache2]"
         variables(
-          :server_name => server_name,
+          :server_name => vhost_server_name,
           :vhost_basedir => vhost_basedir,
-          :document_root => params[:document_root] || "#{vhost_basedir}/htdocs",
+          :document_root => params[:document_root] || "#{vhost_basedir}/htdocs"
         )
-      end
-
-      # Add user vagrant to new group
-      group "#{contract_id}" do
-        action :modify
-        members "vagrant"
-        append true
       end
 
       #############################

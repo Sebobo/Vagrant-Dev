@@ -1,10 +1,22 @@
 {
   "projects": {
-    "local": true,
-    "apache_root_dir": "/var/www",
-    "apache_vhosts_config_dir": "sites-available",
-    "project_list": [
-      "tools"
-    ]
-  }
+    "project_list": []
+  },
+  "mysql": {
+    "server_root_password": "worschdsalat",
+    "bind_address": "127.0.0.1",
+    "server_debian_password": "worschdsalat",
+    "server_repl_password": "worschdsalat"
+  },
+  "couch_db": {
+    "config": {
+      "httpd": {
+        "bind_address": "0.0.0.0"
+      }
+    }
+  },
+  "apache": {
+    "default_site_enabled": true,
+    "listen_ports": ["8000"]
+  },
 }

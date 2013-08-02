@@ -2,5 +2,5 @@
   "id": "tools",
   "document_root": "/vagrant/includes/tools",
   "create_database": false,
-  "state": "enabled"
+  "state": "enable"
 }
