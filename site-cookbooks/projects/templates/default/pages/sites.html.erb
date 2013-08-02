@@ -1,19 +1,35 @@
 <html>
   <head>
-    <title>Active projects</title>
+    <title>Project overview</title>
     <link rel="stylesheet" href="markdown.css" type="text/css" media="all" title="Screen" />
   </head>
   <body>
     <h1>Sites</h1>
 
     <ul>
-      <% @params[:vhosts].each do |vhost| %>
+      <% @sites.each do |site| %>
         <li>
-          <a href="http://<%= vhost[:contract_id] %>.<%= vhost[:server_name] %>">
-            <%= vhost[:contract_id] %>
+          <a href="http://<%= site[:id] %>.<%= @server_name %>">
+            <%= site[:id] %>
           </a>
         </li>
       <% end %>
+    </ul>
+
+    <h2>Tools</h2>
+    <ul>
+      <li>
+        <a href="/phpmyadmin">phpMyAdmin</a>
+      </li>
+      <li>
+        <a href="http://<%= @server_name %>:5984/_utils/">CouchDB Admin</a>
+      </li>
+      <li>
+        <a href="/apc.php">APC Statistics</a>
+      </li>
+      <li>
+        <a href="http://<%= @server_name %>:8080/">Jenkins</a>
+      </li>
     </ul>
   </body>
 </html>

@@ -1,13 +1,6 @@
 {
   "id": "tools",
-  "project_name": "tools",
-  "server_name": "dev.box",
-  "apache": {
-    "ssl": false,
-    "domains": [],
-    "document_root": "/vagrant/includes/tools"
-  },
-  "mysql": {
-    "create_database": false
-  }
+  "document_root": "/vagrant/includes/tools",
+  "create_database": false,
+  "state": "enabled"
 }

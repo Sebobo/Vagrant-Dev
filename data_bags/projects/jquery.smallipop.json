@@ -1,13 +1,6 @@
 {
   "id": "jquery-smallipop",
-  "project_name": "jquery-smallipop",
-  "server_name": "dev.box",
-  "apache": {
-    "ssl": false,
-    "domains": [],
-    "document_root": "/var/workspace/jquery.smallipop"
-  },
-  "mysql": {
-    "create_database": false
-  }
+  "document_root": "/var/workspace/jquery.smallipop",
+  "create_database": false,
+  "state": "enabled"
 }

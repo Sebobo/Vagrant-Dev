@@ -6,72 +6,25 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+
+# Collect project configs form databags
 vhosts = []
 
 node['projects']['project_list'].each do |project|
-
-  if node['projects']['local']
-    project_config = data_bag_item("projects", project)
-  else
-    project_config = search(:projects, project)
-  end
-
-  vhost = {
-      :id => project_config["id"],
-      :contract_id => project_config["project_name"],
-      :server_name => project_config["server_name"],
-      :domains => project_config["apache"]["domains"],
-      :state => "active",
-      :suffix => "",
-      :document_root => project_config["apache"]["document_root"],
-      :create_database => project_config["mysql"]["create_database"],
-  }
-
-  vhosts.push(vhost)
+  vhosts.push(data_bag_item("projects", project).to_hash())
 end
 
-node.default["projects"]["vhosts"] = vhosts
+node.default["projects"]["sites"] = vhosts
 
+# Run other recipes
 include_recipe "apache2"
 
-# Create vhosts
 include_recipe "projects::sites"
+include_recipe "projects::apc"
+include_recipe "projects::varnish"
+include_recipe "projects::jenkins"
 
-# Create html file with list of projects
-template "#{node.projects.apache_root_dir}/index.html" do
-  source "pages/sites.html.erb"
-  variables(
-      :params => {
-          :vhosts => vhosts,
-      }
-  )
-end
-
-# Copy css file to global project
-cookbook_file "#{node.projects.apache_root_dir}/markdown.css" do
-  source "markdown.css"
-  mode 00755
-end
-
-# Create apc ini file
-template "#{node.php.ext_conf_dir}/apc.ini" do
-  source "apc/apc.ini.erb"
-end
-
-# Overwrite default vhost
-template "#{node.apache.dir}/sites-available/default" do
-  source "apache/default-vhost.erb"
-end
-
-# Copy varnish config
-cookbook_file "/etc/default/varnish" do
-  source "varnish"
-end
-cookbook_file "/etc/varnish/default.vcl" do
-  source "default.vcl"
-end
-
-# Restart apache2 after creating all vhosts
+# Restart apache2 after creating all sites
 service "apache2" do
   action :restart
 end

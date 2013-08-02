@@ -1,18 +1,15 @@
 <VirtualHost *:8000>
-    ServerName         <%= @params[:server_name] %>
-<% if @params[:server_aliases].size > 0 %>
-    ServerAlias        <% @params[:server_aliases].each do |a| %><%= a %> <% end %>
-<% end %>
-    DocumentRoot       <%= @params[:document_root] %>
+    ServerName         <%= @server_name %>
+    DocumentRoot       <%= @document_root %>
     DirectoryIndex     index.html index.htm index.php
-    <Directory <%= @params[:document_root] %>>
-            Options FollowSymlinks
-            AllowOverride All
-            Order allow,deny
-            Allow from all
-            DirectoryIndex index.html index.htm index.php
+
+    <Directory <%= @document_root %>>
+        Options FollowSymlinks
+        AllowOverride All
+        Order allow,deny
+        Allow from all
     </Directory>
 
-    ErrorLog        <%= @params[:apache_root_dir] %>/<%= @params[:contract_id] %>/log/error_log
-    CustomLog       <%= @params[:apache_root_dir] %>/<%= @params[:contract_id] %>/log/access_log combined
+    ErrorLog        <%= @vhost_basedir %>/log/error_log
+    CustomLog       <%= @vhost_basedir %>/log/access_log combined
 </VirtualHost>

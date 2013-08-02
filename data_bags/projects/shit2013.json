@@ -1,13 +1,6 @@
 {
   "id": "shit2013",
-  "project_name": "shit2013",
-  "server_name": "dev.box",
-  "apache": {
-    "ssl": false,
-    "domains": [],
-    "document_root": "/var/workspace/shit2013"
-  },
-  "mysql": {
-    "create_database": false
-  }
+  "document_root": "/var/workspace/shit2013",
+  "create_database": false,
+  "state": "enabled"
 }
