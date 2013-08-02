@@ -24,9 +24,17 @@ INSTANCE=dev.box
 DAEMON_OPTS="-a :80 \
               -f /etc/varnish/default.vcl \
               -T 127.0.0.1:6082 \
+              -p thread_pools=4 \
+              -p thread_pool_max=1500 \
+              -p listen_depth=2048 \
+              -p lru_interval=1800 \
+              -p connect_timeout=600 \
+              -p max_restarts=6 \
+              -h classic,169313 \
               -u varnish -g varnish \
               -t 120 \
               -w 5,500,300 \
-              -s file,/var/lib/varnish/$INSTANCE/varnish_storage.bin,1G \
+              -s malloc,2G \
               -S /etc/varnish/secret \
               -n $INSTANCE"
+#-s file,/var/lib/varnish/$INSTANCE/varnish_storage.bin,1G \

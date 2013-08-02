@@ -1,6 +1,9 @@
 backend apache {
     .host = "localhost";
     .port = "8000";
+    .connect_timeout = 60s;
+    .first_byte_timeout = 60s;
+    .between_bytes_timeout = 60s;
 }
 
 sub vcl_recv {
@@ -78,14 +81,6 @@ sub vcl_fetch {
 }
 
 sub vcl_deliver {
-    if (resp.http.magicmarker) {
-        /* Remove the magic marker */
-        unset resp.http.magicmarker;
-
-        /* By definition we have a fresh object */
-        set resp.http.age = "0";
-    }
-
     if (obj.hits > 0) {
         set resp.http.X-Varnish-Cache = "HIT";
         set resp.http.X-Cache-Hits = obj.hits;
