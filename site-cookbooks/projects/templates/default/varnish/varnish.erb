@@ -32,9 +32,4 @@ DAEMON_OPTS="-a :80 \
               -p max_restarts=6 \
               -h classic,169313 \
               -u varnish -g varnish \
-              -t 120 \
-              -w 5,500,300 \
-              -s malloc,2G \
-              -S /etc/varnish/secret \
-              -n $INSTANCE"
-#-s file,/var/lib/varnish/$INSTANCE/varnish_storage.bin,1G \
+              -s malloc,1G"

@@ -1,11 +1,12 @@
 backend apache {
-    .host = "localhost";
+    .host = "127.0.0.1";
     .port = "8000";
-    .connect_timeout = 60s;
-    .first_byte_timeout = 60s;
-    .between_bytes_timeout = 60s;
+    .connect_timeout = 600s;
+    .first_byte_timeout = 600s;
+    .between_bytes_timeout = 600s;
 }
 
+<% if @caching_enabled %>
 sub vcl_recv {
     if (req.http.x-forwarded-for) {
         set req.http.X-Forwarded-For =
@@ -88,3 +89,4 @@ sub vcl_deliver {
         set resp.http.X-Varnish-Cache = "MISS";
     }
 }
+<% end %>
