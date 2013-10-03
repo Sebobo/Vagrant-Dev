@@ -39,9 +39,9 @@ sub vcl_recv {
         return (pass);
     }
 
-    if(req.http.host ~ "/typo3"){
-        ## TYPO3-Backend nicht cachen
-        if (req.http.cookie ~ "be_typo_user"){
+    if(req.http.host ~ "/typo3" || req.http.host ~ "/neos"){
+        ## Don't cache backend
+        if (req.http.cookie ~ "be_typo_user" || req.http.cookie ~ "TYPO3_Flow_Session"){
             ## Inhalten löschen wenn Shift+reload gedrückt wird, aber nur bei eingeloggtem user (Backend-Cookie)
             if (req.http.Cache-Control ~ "no-cache") {
                 set req.ttl = 0s;

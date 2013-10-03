@@ -43,6 +43,7 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "apache2::mod_php5"
     chef.add_recipe "apache2::mod_rewrite"
     chef.add_recipe "apache2::mod_expires"
+    chef.add_recipe "apache2::mod_headers"
 
     # Setup varnish
     chef.add_recipe "varnish"
@@ -61,15 +62,17 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "phantomjs"
     chef.add_recipe "memcached"
     chef.add_recipe "openssl"
+    chef.add_recipe "redis"
 
     # Nodejs
     chef.add_recipe "nodejs-cookbook::install_from_package"
 
     # Add projects
     chef.add_recipe "projects"
+    chef.add_recipe "projects::module_mcrypt"
 
     # Jenkins
-    chef.add_recipe "jenkins::server"
+    # chef.add_recipe "jenkins::server"
   end
 
 end

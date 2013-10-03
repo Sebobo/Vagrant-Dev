@@ -6,7 +6,7 @@ sites.each do |site|
   create_site site[:id] do
     document_root site[:document_root]
     create_database site[:create_database]
-    action site[:state]
+    action site[:state] == 'enable' ? :enable : :disabled
   end
 end
 

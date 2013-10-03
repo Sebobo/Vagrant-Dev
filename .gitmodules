@@ -85,3 +85,12 @@
 [submodule "cookbooks/varnish"]
 	path = cookbooks/varnish
 	url = https://github.com/opscode-cookbooks/varnish
+[submodule "cookbooks/chocolatey"]
+	path = cookbooks/chocolatey
+	url = https://github.com/chocolatey/chocolatey-cookbook
+[submodule "cookbooks/powershell"]
+	path = cookbooks/powershell
+	url = https://github.com/opscode-cookbooks/powershell
+[submodule "cookbooks/redis"]
+	path = cookbooks/redis
+	url = https://github.com/ctrabold/chef-redis

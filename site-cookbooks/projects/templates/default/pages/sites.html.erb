@@ -1,35 +1,60 @@
+<!doctype html>
 <html>
   <head>
     <title>Project overview</title>
-    <link rel="stylesheet" href="markdown.css" type="text/css" media="all" title="Screen" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="css/reset.css" type="text/css" media="all" title="Screen" />
+    <link rel="stylesheet" href="css/markdown.css" type="text/css" media="all" title="Screen" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all" title="Screen" />
   </head>
   <body>
     <h1>Sites</h1>
 
-    <ul>
+    <div class="tiles">
       <% @sites.each do |site| %>
-        <li>
+        <div>
           <a href="http://<%= site[:id] %>.<%= @server_name %>">
             <%= site[:id] %>
           </a>
-        </li>
+        </div>
       <% end %>
-    </ul>
+    </div>
 
     <h2>Tools</h2>
-    <ul>
-      <li>
+    <div class="tiles">
+      <div>
         <a href="/phpMyAdmin">phpMyAdmin</a>
-      </li>
-      <li>
+      </div>
+      <div>
         <a href="http://<%= @server_name %>:5984/_utils/">CouchDB Admin</a>
-      </li>
-      <li>
+      </div>
+      <div>
         <a href="/apc.php">APC Statistics</a>
-      </li>
-      <li>
+      </div>
+      <div>
         <a href="http://<%= @server_name %>:8080/">Jenkins</a>
-      </li>
+      </div>
     </ul>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery.wookmark.min.js"></script>
+    <script type="text/javascript">
+      (function ($){
+        $('.tiles').each(function() {
+          $(this).imagesLoaded(function() {
+            // Prepare layout options.
+            var $self = $(this);
+
+            $self.children().wookmark({
+              autoResize: true,
+              container: $self,
+              offset: 2,
+              itemWidth: 210
+            });
+          });
+        });
+      })(jQuery);
+    </script>
   </body>
 </html>

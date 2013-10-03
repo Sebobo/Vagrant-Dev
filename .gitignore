@@ -4,3 +4,5 @@
 /.idea/
 /data_bags/projects/*.json
 /dev-config.json
+
+.DS_Store
