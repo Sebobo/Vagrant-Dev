@@ -7,8 +7,10 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "dev.box"
   config.vm.network :private_network, ip: "192.168.164.123"
 
+  # Shares
   config.vm.synced_folder "~/Workspace", "/var/workspace", :nfs => true, :nfs_version => 3
 
+  # Vitualbox settings
   config.vm.provider "virtualbox" do |v|
     v.name = "Dev.Box"
     v.customize [
@@ -18,8 +20,14 @@ Vagrant.configure("2") do |config|
     ]
   end
 
+  # Provisiong
   config.vm.provision :shell, :path => "bootstrap.sh"
 
+  # DNS Server, see https://github.com/BerlinVagrant/vagrant-dns
+  # config.dns.tld = "dev.box"
+  # config.dns.patterns = [/^.*dev.box$/]
+
+  # Chef provisioning
   config.vm.provision :chef_solo do |chef|
     # This path will be expanded relative to the project directory
     chef.cookbooks_path = ["cookbooks", "site-cookbooks"]
@@ -63,6 +71,9 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "memcached"
     chef.add_recipe "openssl"
     chef.add_recipe "redis"
+
+    # Shell
+    # chef.add_recipe "chef-prezto"
 
     # Nodejs
     chef.add_recipe "nodejs-cookbook::install_from_package"

@@ -12,4 +12,5 @@
 
     ErrorLog        <%= @vhost_basedir %>/log/error_log
     CustomLog       <%= @vhost_basedir %>/log/access_log combined
+    CustomLog       <%= @vhost_basedir %>/log/access_log_time "%h %l %u %t \"%r\" %>s %b %D"
 </VirtualHost>

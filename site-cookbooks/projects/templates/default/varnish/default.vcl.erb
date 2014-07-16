@@ -8,6 +8,11 @@ backend apache {
 
 <% if @caching_enabled %>
 sub vcl_recv {
+
+    if (req.http.host ~ "(shit2013neos|neos-sprint)\.(dev\.box)") {
+        return (pipe);
+    }
+
     if (req.http.x-forwarded-for) {
         set req.http.X-Forwarded-For =
         req.http.X-Forwarded-For + ", " + client.ip;

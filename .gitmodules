@@ -94,3 +94,24 @@
 [submodule "cookbooks/redis"]
 	path = cookbooks/redis
 	url = https://github.com/ctrabold/chef-redis
+[submodule "cookbooks/chef-prezto"]
+	path = cookbooks/chef-prezto
+	url = git@github.com:leifcr/chef-prezto.git
+[submodule "cookbooks/git"]
+	path = cookbooks/git
+	url = https://github.com/opscode-cookbooks/git
+[submodule "cookbooks/dmg"]
+	path = cookbooks/dmg
+	url = https://github.com/opscode-cookbooks/dmg
+[submodule "cookbooks/yum-epel"]
+	path = cookbooks/yum-epel
+	url = https://github.com/opscode-cookbooks/yum-epel
+[submodule "cookbooks/zsh"]
+	path = cookbooks/zsh
+	url = https://github.com/opscode-cookbooks/zsh
+[submodule "cookbooks/chef-solo-search"]
+	path = cookbooks/chef-solo-search
+	url = https://github.com/edelight/chef-solo-search
+[submodule "cookbooks/php-ioncube"]
+	path = cookbooks/php-ioncube
+	url = https://github.com/werdan/php-ioncube.git

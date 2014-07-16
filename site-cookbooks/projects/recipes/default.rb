@@ -22,7 +22,8 @@ include_recipe "apache2"
 include_recipe "projects::sites"
 include_recipe "projects::apc"
 include_recipe "projects::varnish"
-include_recipe "projects::jenkins"
+# include_recipe "projects::jenkins"
+# include_recipe "projects::xdebug"
 
 # Restart apache2 after creating all sites
 service "apache2" do
