@@ -71,6 +71,7 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "memcached"
     chef.add_recipe "openssl"
     chef.add_recipe "redis"
+    chef.add_recipe "php-ioncube::install"
 
     # Shell
     # chef.add_recipe "chef-prezto"
